@@ -22,57 +22,58 @@ This script sends a search query to a website and extracts the content of <p> (p
 ## Code Explanation
 
 ### 1. Import Libraries
-
+```
 import urllib.request
 import urllib.parse
 import re
+```
 - `urllib.request: For sending HTTP requests and receiving responses.
 - urllib.parse: For encoding query parameters.
 - re: For regular expression operations to parse HTML content.
 
 ### 2. Define URL and Query Parameters
 
-``python
+```
 url = 'http://pythonprogramming.net'
 values = {'s': 'basics',
           'submit': 'search'}
-
+```
 - `url`: The target URL to send the request.
 - `values`: Dictionary containing query parameters to be sent with the request.
 
 ### 3. Encode Query Parameters
 
-python
+```
 data = urllib.parse.urlencode(values)
 data = data.encode('utf-8')
-
+```
 - `urllib.parse.urlencode()`: Encodes the dictionary into a query string.
 - `.encode('utf-8')`: Converts the query string into bytes, which is necessary for sending in the HTTP request.
 
 ### 4. Create and Send the HTTP Request
 
-python
+```
 req = urllib.request.Request(url, data)
 resp = urllib.request.urlopen(req)
 respData = resp.read()
-
+```
 - `urllib.request.Request()`: Prepares the request with the URL and encoded data.
 - `urllib.request.urlopen()`: Sends the request and gets the response.
 - `.read()`: Reads the response data.
 
 ### 5. Extract Paragraphs from HTML
 
-python
+```
 paragraphs = re.findall(r'<p>(.*?)</p>', str(respData))
-
+```
 - `re.findall()`: Uses a regular expression to find all occurrences of `<p>` tags and extract their content.
 
 ### 6. Print Extracted Paragraphs
 
-python
+```
 for eachP in paragraphs:
     print(eachP)
-
+```
 - Iterates over the extracted paragraphs and prints each one.
 
 ## Usage
@@ -81,9 +82,9 @@ for eachP in paragraphs:
 2. **Modify parameters**: Adjust the `url` and `values` if needed to target different pages or search terms.
 3. **Run the script**: Execute the script using Python:
    
-bash
+```
    python web_scraping.py
-   `
+   ```
 4. **View results**: The script will print out the content of all `<p>` tags found in the HTML response.
 
 ## Example
